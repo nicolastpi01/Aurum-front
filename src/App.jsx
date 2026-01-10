@@ -1,9 +1,10 @@
 import { Typography, Button, Stack } from "@mui/material";
 import AppShell from "./components/AppShell.jsx";
+import ThemeToggleButton from "./components/ThemeToggleButton.jsx";
 
 function App() {
   return (
-    <AppShell>
+    <AppShell rightSlot={<ThemeToggleButton />}>
       <Stack spacing={2}>
         <Typography variant='h4'>Aurum</Typography>
         <Typography>
