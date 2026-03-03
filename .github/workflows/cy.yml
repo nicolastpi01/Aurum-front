@@ -28,13 +28,21 @@ jobs:
 
       - name: Test (if present)
         run: npm test --if-present
-
+        
       - name: Build
         run: npm run build
 
+      - name: Start app
+        run: |
+          npm run preview -- --port 5173 &
+          npx wait-on http://localhost:5173
+
+      - name: Run Cypress
+        run: npm run cypress:run
+               
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
+        
       - name: Docker build (no push)
         uses: docker/build-push-action@v6
         with:
