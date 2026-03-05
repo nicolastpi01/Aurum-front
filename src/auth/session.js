@@ -8,7 +8,6 @@ export function isAuthenticated() {
   return Boolean(getAccessToken());
 }
 
-// útil para tests o futuro login real
 export function setAccessToken(token) {
   localStorage.setItem(TOKEN_KEY, token);
 }
