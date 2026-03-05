@@ -6,20 +6,34 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-const handleLogin = async () => {
-  try {
+  const handleLogin = async () => {
+    try {
 
-    const data = { accessToken: "fake-token" };
+      setError(null);
 
-    setAccessToken(data.accessToken);
+      // simulación login
+      if (email === "test@test.com" && password === "1234") {
 
-    window.location.href = "/dashboard";
+        const data = { accessToken: "fake-token" };
 
-  } catch (error) {
-    console.error(error);
-  }
-};
+        setAccessToken(data.accessToken);
+
+        window.location.href = "/dashboard";
+
+      } else {
+
+        setError("Invalid credentials");
+
+      }
+
+    } catch (error) {
+
+      setError("Login failed");
+
+    }
+  };
 
   return (
     <Stack spacing={2} data-cy="page-login" sx={{ maxWidth: 400 }}>
@@ -41,6 +55,13 @@ const handleLogin = async () => {
       <Button variant="contained" onClick={handleLogin}>
         Login
       </Button>
+
+      {error && (
+        <Typography color="error">
+          {error}
+        </Typography>
+      )}
+
     </Stack>
   );
 }
