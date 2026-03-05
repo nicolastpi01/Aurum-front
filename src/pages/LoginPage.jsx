@@ -9,31 +9,34 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
 
   const handleLogin = async () => {
-    try {
+  try {
 
-      setError(null);
+    const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    });
 
-      // simulación login
-      if (email === "test@test.com" && password === "1234") {
-
-        const data = { accessToken: "fake-token" };
-
-        setAccessToken(data.accessToken);
-
-        window.location.href = "/dashboard";
-
-      } else {
-
-        setError("Invalid credentials");
-
-      }
-
-    } catch (error) {
-
-      setError("Login failed");
-
+    if (!response.ok) {
+      setError("Credenciales incorrectas");
+      return;
     }
-  };
+
+    const data = await response.json();
+
+    setAccessToken(data.accessToken);
+
+    window.location.href = "/dashboard";
+
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <Stack spacing={2} data-cy="page-login" sx={{ maxWidth: 400 }}>
