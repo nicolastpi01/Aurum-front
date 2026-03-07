@@ -48,4 +48,22 @@ describe("Login Flow - Aurum", () => {
       .and("have.css", "color", "rgb(211, 47, 47)"); // Opcional: verifica que sea rojo
   });
 
+  it("Login contra el back real", () => {
+    // 1. Interceptamos sin simular respuesta (para que vaya al servidor real)
+    cy.intercept("POST", "**/api/v1/auth/login").as("loginRequest");
+
+    // 2. Usamos los selectores que SÍ funcionan en tu pantalla
+    cy.get('input').eq(0).type("test@aurum.com", { force: true });
+    cy.get('input').eq(1).type("12345678", { force: true });
+
+    // 3. El botón dice LOGIN en mayúsculas
+    cy.contains("button", /LOGIN/i).click();
+
+    // 4. Esperamos la respuesta del servidor real
+    cy.wait("@loginRequest");
+
+    // 5. Verificamos la ruta
+    cy.location("pathname").should("eq", "/dashboard");
+  });
+
 });
