@@ -1,6 +1,7 @@
 import { Typography, Stack, TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { setAccessToken } from "../auth/session";
+import { login } from "../services/authService";
 
 export default function LoginPage() {
 
@@ -9,34 +10,15 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
 
   const handleLogin = async () => {
-  try {
-
-    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    });
-
-    if (!response.ok) {
-      setError("Credenciales incorrectas");
-      return;
+    try {
+      setError(null);
+      const data = await login(email, password);
+      setAccessToken(data.accessToken);
+      window.location.href = "/dashboard";
+    } catch (error) {
+      setError(error.message);
     }
-
-    const data = await response.json();
-
-    setAccessToken(data.accessToken);
-
-    window.location.href = "/dashboard";
-
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   return (
     <Stack spacing={2} data-cy="page-login" sx={{ maxWidth: 400 }}>
