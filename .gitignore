@@ -14,7 +14,9 @@ dist-ssr
 
 # Environment variables
 .env
+cypress.env.json
 !.env.example
+
 
 # Editor directories and files
 .vscode/*

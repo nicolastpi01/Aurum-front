@@ -1,0 +1,25 @@
+# Reglas de Desarrollo - Proyecto Aurum (Fintech)
+
+## Stack Tecnológico
+- **Frontend:** React 19.2.0, Vite 7.2.4, Node 20.
+- **UI Libs:** Material UI (MUI) 7, Emotion (Styled components).
+- **Routing:** React Router 7.
+- **Testing:** Cypress 15.8.2.
+
+## Estándares de Código (JavaScript Moderno)
+- **Componentes:** Usar solo componentes funcionales (Hooks) y explica como lo aplicas.
+- **Validación:** Implementar `prop-types` para todos los componentes.
+- **Sintaxis:** Priorizar desestructuración, Default Parameters y Optional Chaining (`?.`).
+- **Nomenclatura:** PascalCase para componentes, camelCase para funciones/hooks, constantes en UPPER_SNAKE_CASE.
+- **Performance:** - Evitar re-renders innecesarios.
+    - Usar `useMemo` y `useCallback` solo en cálculos pesados o dependencias críticas.
+    - Implementar Lazy Loading con `React.lazy` para rutas de React Router 7.
+
+## Estilo y UI (MUI 7)
+- Priorizar el uso del componente `<Box>` y el sistema de `sx` props de MUI para layouts rápidos.
+- Mantener la coherencia con el tema (Theme) de Material UI.
+
+## Instrucciones para Cascade (IA)
+- **Idioma:** Explicaciones en español. Código, variables y comentarios técnicos en inglés.
+- **Contexto:** Si se sugiere un cambio, verificar que sea compatible con React 19 (ej. el nuevo hook `use` o mejoras en transiciones).
+- **Consultas:** Si no estás seguro de una API de MUI 7 o Vite 7, pedime permiso para usar el MCP fetch y leer la doc oficial.

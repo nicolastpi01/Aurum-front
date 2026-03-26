@@ -53,8 +53,8 @@ describe("Login Flow - Aurum", () => {
     cy.intercept("POST", "**/api/v1/auth/login").as("loginRequest");
 
     // 2. Usamos los selectores que SÍ funcionan en tu pantalla
-    cy.get('input').eq(0).type("test@aurum.com", { force: true });
-    cy.get('input').eq(1).type("12345678", { force: true });
+    cy.get('input').eq(0).type(Cypress.env("TEST_USER"), { force: true });
+    cy.get('input').eq(1).type(Cypress.env("TEST_PASS"), { force: true });
 
     // 3. El botón dice LOGIN en mayúsculas
     cy.contains("button", /LOGIN/i).click();
