@@ -4,6 +4,7 @@ import ThemeToggleButton from "../components/ThemeToggleButton.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import DashboardPage from "../pages/DashboardPage.jsx";
 import TransferPage from "../pages/TransferPage.jsx";
+import AccountMovements from "../pages/AccountMovements.jsx";
 import ProtectedRoute from "../auth/ProtectedRoute.jsx";
 import { isAuthenticated } from "../auth/session.js";
 
@@ -51,6 +52,14 @@ function App() {
             element={
               <AppLayout>
                 <TransferPage />
+              </AppLayout>
+            }
+          />
+          <Route
+            path='/accounts/:id/movements'
+            element={
+              <AppLayout>
+                <AccountMovements />
               </AppLayout>
             }
           />

@@ -37,6 +37,13 @@ No gastes mensajes preguntando "por qué falla".
 2. Pegale el error específico a Cascade.
 Ahorrás tokens de "análisis general" y vas directo al grano.
 
+### 🧪 El Laboratorio de Prompts
+**No improvises en el chat de Cascade.** Si el requerimiento es complejo (como crear un componente + su test + navegación), seguí este flujo:
+
+1. **Refinamiento Externo:** Usá el chat de Gemini o ChatGPT para "masticar" la idea. Decile: *"Quiero pedirle esto a mi IA de código, ¿cómo puedo redactar el prompt para que me genere el código y el test de una sola vez y sin errores?"*.
+2. **Prompt de Alta Precisión:** Una vez que tengas el pedido refinado (como el que armamos para el issue de Movimientos), pegalo en Cascade.
+3. **Resultado:** Obtenés código que funciona al 90% en el primer intento, evitando el "ida y vuelta" de correcciones que es lo que más consume cuota.
+
 ---
 
 ## 🚀 3. Flujo de Trabajo Recomendado

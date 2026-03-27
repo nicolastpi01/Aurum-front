@@ -1,8 +1,12 @@
-import { Typography, Stack, Card, CardContent, List, ListItem, ListItemText, CircularProgress, Alert } from "@mui/material";
+import { Typography, Stack, Card, CardContent, List, ListItem, ListItemText, CircularProgress, Alert, Button } from "@mui/material";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAccounts } from "../services/accountsService";
+import PropTypes from "prop-types";
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,6 +34,10 @@ export default function DashboardPage() {
 
     fetchAccounts();
   }, []);
+
+  const handleViewMovements = (accountId) => {
+    navigate(`/accounts/${accountId}/movements`);
+  };
 
   if (loading) {
     return (
@@ -62,10 +70,20 @@ export default function DashboardPage() {
             <ListItem key={account.id}>
               <Card sx={{ width: '100%' }}>
                 <CardContent>
-                  <ListItemText
-                    primary={`Cuenta ID: ${account.id} - ${account.currency}`}
-                    secondary={`Balance: $${account.balance} | Estado: ${account.status}`}
-                  />
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <ListItemText
+                      primary={`Cuenta ID: ${account.id} - ${account.currency}`}
+                      secondary={`Balance: $${account.balance} | Estado: ${account.status}`}
+                    />
+                    <Button
+                      variant="outlined"
+                      startIcon={<VisibilityIcon />}
+                      onClick={() => handleViewMovements(account.id)}
+                      data-cy={`btn-view-movements-${account.id}`}
+                    >
+                      Ver Movimientos
+                    </Button>
+                  </Stack>
                 </CardContent>
               </Card>
             </ListItem>
@@ -75,3 +93,7 @@ export default function DashboardPage() {
     </Stack>
   );
 }
+
+DashboardPage.propTypes = {
+  // No props required - uses hooks for state and navigation
+};

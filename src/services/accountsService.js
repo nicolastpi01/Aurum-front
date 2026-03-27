@@ -23,3 +23,24 @@ export async function getAccounts() {
 
   return await response.json();
 }
+
+export async function getAccountMovements(accountId, page = 0, size = 10) {
+  const token = getAccessToken();
+  if (!token) {
+    throw new Error("No autenticado");
+  }
+
+  const response = await fetch(`${API_BASE_URL}/accounts/${accountId}/movements?page=${page}&size=${size}`, {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    handleApiError(response);
+  }
+
+  return await response.json();
+}
